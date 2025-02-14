@@ -3,7 +3,6 @@ import fs from 'fs';
 import * as http from "http";
 import * as https from "https";
 import * as jws from 'jws';
-// import fetch from 'node-fetch';
 import path from 'path';
 import sanitizeHtml from 'sanitize-html';
 import { SecureContextOptions } from 'tls';
