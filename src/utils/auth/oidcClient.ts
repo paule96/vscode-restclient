@@ -397,6 +397,7 @@ export class OidcClient {
           });
         }catch(ex){
           reportError('We hadn\'t a valid refresh token. Fallback to interactive workflow.', ex);
+          this.cleanupTokenCache();
           // Don't do anything here and continue with the interactive workflow
         }
         
