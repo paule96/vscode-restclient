@@ -379,7 +379,7 @@ export class OidcClient {
     const tryDecode = (token: string): any => {
       try {
         const { payload } = jws.decode(token) ?? {};
-        return JSON.parse(payload);
+        return payload;
       } catch (ex) {
         reportError('Faild to decode access token', ex);
         return null;
