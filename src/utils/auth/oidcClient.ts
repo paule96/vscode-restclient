@@ -390,10 +390,16 @@ export class OidcClient {
       if (payloadJson === null || payloadJson.exp && payloadJson.exp > Date.now() / 1000) {
         return this._tokenInformation.access_token;
       } else {
-        return this.getAccessTokenByRefreshToken(this._tokenInformation.refresh_token, this.clientId).then((resp) => {
-          this._tokenInformation = resp;
-          return resp.access_token;
-        });
+        try{
+          return this.getAccessTokenByRefreshToken(this._tokenInformation.refresh_token, this.clientId).then((resp) => {
+            this._tokenInformation = resp;
+            return resp.access_token;
+          });
+        }catch(ex){
+          reportError('We hadn\'t a valid refresh token. Fallback to interactive workflow.', ex);
+          // Don't do anything here and continue with the interactive workflow
+        }
+        
       }
     }
 
